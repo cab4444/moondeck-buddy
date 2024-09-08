@@ -136,8 +136,6 @@ bool SteamHandler::launchApp(uint app_id, bool force_big_picture)
             steam_process.setProgram(m_steam_exec_path);
             steam_process.setArguments(QStringList() << "steam://open/bigpicture"
                                                      << "-master_ipc_name_override"
-                                                     << "CobaltDuo"
-                                                     << "-userchooser"
                                                      << "CobaltDuo");
 
             if (!steam_process.startDetached())
@@ -155,9 +153,9 @@ bool SteamHandler::launchApp(uint app_id, bool force_big_picture)
         steam_process.setStandardOutputFile(QProcess::nullDevice());
         steam_process.setStandardErrorFile(QProcess::nullDevice());
         steam_process.setProgram(m_steam_exec_path);
-        steam_process.setArguments((force_big_picture && !is_steam_running ? QStringList{"-bigpicture"} : QStringList{})
-                                   + QStringList{"-applaunch", QString::number(app_id), "-master_ipc_name_override",
-                                                 "CobaltDuo", "-userchooser", "CobaltDuo"});
+        steam_process.setArguments(
+            (force_big_picture && !is_steam_running ? QStringList{"-bigpicture"} : QStringList{})
+            + QStringList{"-applaunch", QString::number(app_id), "-master_ipc_name_override", "CobaltDuo"});
 
         if (!steam_process.startDetached())
         {
