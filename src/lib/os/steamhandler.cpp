@@ -137,7 +137,6 @@ bool SteamHandler::launchApp(uint app_id, bool force_big_picture)
             steam_process.setArguments(QStringList()
                 << "steam://open/bigpicture"
                 << "-master_ipc_name_override" << "CobaltDuo"
-                << "-userchooser" << "CobaltDuo"
             );
 
             if (!steam_process.startDetached())
